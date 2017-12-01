@@ -8,7 +8,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build-prod": "ng build --prod --base-href 'https://ksachdeva.github.io/deeplearn-examples/'",
+    "push-ghpages": "ngh",
+    "deploy": "npm -s run-script build-prod && npm -s run-script push-ghpages"
   },
   "private": true,
   "dependencies": {
