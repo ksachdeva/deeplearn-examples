@@ -1,8 +1,8 @@
-@angular/core@5.0.4
+seedrandom@2.4.3
 MIT
 MIT
 
-seedrandom@2.4.3
+@angular/core@5.0.4
 MIT
 MIT
 
