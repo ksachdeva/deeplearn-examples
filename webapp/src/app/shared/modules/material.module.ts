@@ -13,12 +13,15 @@ import {
   MatSliderModule,
   MatSnackBarModule,
   MatTooltipModule,
-  MatChipsModule
+  MatChipsModule,
+  MatTableModule
 } from '@angular/material';
+import { CdkTableModule } from '@angular/cdk/table';
 import { NgModule } from '@angular/core';
 
 @NgModule({
   imports: [
+    CdkTableModule,
     MatToolbarModule,
     MatButtonModule,
     MatMenuModule,
@@ -33,9 +36,11 @@ import { NgModule } from '@angular/core';
     MatTooltipModule,
     MatListModule,
     MatDialogModule,
-    MatChipsModule
+    MatChipsModule,
+    MatTableModule
   ],
   exports: [
+    CdkTableModule,
     MatToolbarModule,
     MatButtonModule,
     MatMenuModule,
@@ -50,7 +55,8 @@ import { NgModule } from '@angular/core';
     MatTooltipModule,
     MatListModule,
     MatDialogModule,
-    MatChipsModule
+    MatChipsModule,
+    MatTableModule
   ],
 })
 

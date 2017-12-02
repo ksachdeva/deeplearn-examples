@@ -1,0 +1,32 @@
+<mat-card class="sample-card">
+  <mat-card-header>
+    <mat-card-title>
+      <h3>DataSet</h3>
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-table #table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+    </ng-container>
+
+    <!-- Bill Column -->
+    <ng-container matColumnDef="bill">
+      <mat-header-cell *matHeaderCellDef> Bill </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.bill}} </mat-cell>
+    </ng-container>
+
+    <!-- Tip Column -->
+    <ng-container matColumnDef="tip">
+      <mat-header-cell *matHeaderCellDef> Tip </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.tip}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+</mat-card>
