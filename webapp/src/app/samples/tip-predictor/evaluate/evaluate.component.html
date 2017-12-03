@@ -5,8 +5,22 @@
     </mat-card-title>
   </mat-card-header>
 
-  <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="evaluate()">Run</button>
-  </mat-card-actions>
+  <mat-card-content>
+
+    <form [formGroup]="options" (ngSubmit)="evaluate()">
+
+      <mat-form-field>
+        <input formControlName="bill" required type="number" matInput placeholder="Enter Bill">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input formControlName="tip" matInput placeholder="Predicted Tip">
+      </mat-form-field>
+
+      <button [disabled]="!options.valid" type="submit" mat-raised-button color="primary">Run</button>
+
+    </form>
+
+  </mat-card-content>
 
 </mat-card>

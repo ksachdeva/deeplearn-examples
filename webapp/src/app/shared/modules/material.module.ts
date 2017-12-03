@@ -14,7 +14,10 @@ import {
   MatSnackBarModule,
   MatTooltipModule,
   MatChipsModule,
-  MatTableModule
+  MatTableModule,
+  MatSelectModule,
+  MatOptionModule,
+  MatFormFieldModule
 } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
 import { NgModule } from '@angular/core';
@@ -37,7 +40,10 @@ import { NgModule } from '@angular/core';
     MatListModule,
     MatDialogModule,
     MatChipsModule,
-    MatTableModule
+    MatTableModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatFormFieldModule
   ],
   exports: [
     CdkTableModule,
@@ -56,9 +62,11 @@ import { NgModule } from '@angular/core';
     MatListModule,
     MatDialogModule,
     MatChipsModule,
-    MatTableModule
+    MatTableModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatFormFieldModule
   ],
 })
-
 export class MaterialModule {
 }

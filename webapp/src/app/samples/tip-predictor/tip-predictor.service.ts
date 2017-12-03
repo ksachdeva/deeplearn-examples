@@ -15,7 +15,11 @@ export class TipPredictorService {
   constructor() {
   }
 
-  public async train() {
+  public async train(input: {
+    cpu: string;
+    batch: number;
+    rate: number;
+  }) {
     const graph = new Graph();
 
     this.x = graph.placeholder('x', []);
@@ -57,13 +61,10 @@ export class TipPredictorService {
         shuffledInputProviderBuilder.getInputProviders();
 
       // Training is broken up into batches.
-      const NUM_BATCHES = 200;
       const BATCH_SIZE = xs.length;
+      const optimizer = new SGDOptimizer(input.rate);
 
-      const LEARNING_RATE = .0001;
-      const optimizer = new SGDOptimizer(LEARNING_RATE);
-
-      for (let i = 0; i < NUM_BATCHES; i++) {
+      for (let i = 0; i < input.batch; i++) {
         // Train takes a cost tensor to minimize; this call trains one batch and
         // returns the average cost of the batch as a Scalar.
         const costValue = this.session.train(
@@ -78,12 +79,10 @@ export class TipPredictorService {
 
   }
 
-  public async eval() {
-    // Now print the value from the trained model for x = 120, should be ~17.0.
-    const result = this.session.eval(this.y, [{ tensor: this.x, data: Scalar.new(120) }]);
-    console.log('result should be ~17.0:');
-    console.log(result);
-    console.log(await result.data());
+  public async eval(newBill: number) {
+    const result = this.session.eval(
+      this.y, [{ tensor: this.x, data: Scalar.new(newBill) }]);
+    return result.data();
   }
 
 }
