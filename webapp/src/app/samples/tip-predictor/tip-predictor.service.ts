@@ -4,6 +4,7 @@ import {
   Scalar, InCPUMemoryShuffledInputProviderBuilder,
   SGDOptimizer, CostReduction
 } from 'deeplearn';
+import { TipDataSetService } from './dataset.service';
 
 @Injectable()
 export class TipPredictorService {
@@ -12,7 +13,7 @@ export class TipPredictorService {
   y: Tensor;
   x: Tensor;
 
-  constructor() {
+  constructor(private dataSetService: TipDataSetService) {
   }
 
   public async train(input: {
@@ -38,22 +39,11 @@ export class TipPredictorService {
 
     await math.scope(async (keep, track) => {
 
-      const xs: Scalar[] = [
-        track(Scalar.new(34)),
-        track(Scalar.new(108)),
-        track(Scalar.new(64)),
-        track(Scalar.new(88)),
-        track(Scalar.new(99)),
-        track(Scalar.new(51))
-      ];
-      const ys: Scalar[] = [
-        track(Scalar.new(5)),
-        track(Scalar.new(17)),
-        track(Scalar.new(11)),
-        track(Scalar.new(8)),
-        track(Scalar.new(15)),
-        track(Scalar.new(5))
-      ];
+      // get the data set
+      const ds = await this.dataSetService.getDataSet();
+
+      const xs: Scalar[] = ds.map(s => track(Scalar.new(s.bill)));
+      const ys: Scalar[] = ds.map(s => track(Scalar.new(s.tip)));
 
       const shuffledInputProviderBuilder =
         new InCPUMemoryShuffledInputProviderBuilder([xs, ys]);

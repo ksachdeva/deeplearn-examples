@@ -8,12 +8,13 @@ import { EvaluateComponent } from './evaluate';
 import { TipPredictorComponent } from './tip-predictor.component';
 import { SharedModule } from '../../shared/modules/shared.module';
 import { TipPredictorService } from './tip-predictor.service';
+import { TipDataSetService } from './dataset.service';
 
 @NgModule({
   imports: [
     SharedModule
   ],
-  providers: [TipPredictorService],
+  providers: [TipPredictorService, TipDataSetService],
   exports: [TipPredictorComponent],
   declarations: [
     DataSetComponent,
