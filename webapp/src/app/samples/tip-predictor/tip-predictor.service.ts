@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  Graph, Tensor, NDArrayMathCPU, Session,
+  Graph, Tensor, NDArrayMathCPU, Session, NDArrayMathGPU,
   Scalar, InCPUMemoryShuffledInputProviderBuilder,
   SGDOptimizer, CostReduction
 } from 'deeplearn';
@@ -17,7 +17,7 @@ export class TipPredictorService {
   }
 
   public async train(input: {
-    cpu: string;
+    unit: string;
     batch: number;
     rate: number;
   }) {
@@ -34,7 +34,8 @@ export class TipPredictorService {
 
     const cost: Tensor = graph.meanSquaredCost(this.y, yLabel);
 
-    const math = new NDArrayMathCPU();
+    const math = input.unit === 'cpu' ? new NDArrayMathCPU() : new NDArrayMathGPU();
+
     this.session = new Session(graph, math);
 
     await math.scope(async (keep, track) => {
